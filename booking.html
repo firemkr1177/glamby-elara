@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book — GlamBy Elara</title>
+  <meta name="description" content="Enquire about bridal, occasion or editorial makeup with GlamBy Elara. One short form — get availability and a quote within one working day.">
+  <meta name="theme-color" content="#1a1310">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <nav class="header__nav header__nav--left" aria-label="Primary">
+        <a class="pill pill--nav" href="about.html">About</a>
+        <a class="pill pill--nav" href="services.html">Services</a>
+        <a class="pill pill--nav" href="faq.html">FAQ</a>
+      </nav>
+
+      <a href="index.html" class="logo" aria-label="GlamBy Elara — home">
+        <svg class="logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <circle cx="13" cy="13" r="12" stroke="currentColor" stroke-width="1.1"/>
+          <path d="M13 4.5c1.5 4.5 4 7 8.5 8.5-4.5 1.5-7 4-8.5 8.5-1.5-4.5-4-7-8.5-8.5 4.5-1.5 7-4 8.5-8.5Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo__text">GlamBy <em>Elara</em></span>
+      </a>
+
+      <nav class="header__nav header__nav--right" aria-label="Secondary">
+        <a class="pill pill--nav" href="booking.html">Book now</a>
+        <a class="pill pill--nav pill--icon" href="booking.html" aria-label="Go to booking">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services &amp; Looks</a>
+    <a href="faq.html">FAQ</a>
+    <a href="booking.html" class="mobile-menu__cta">Book now</a>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ BOOKING ============ -->
+    <section class="page-head booking" id="book">
+      <div class="container booking__grid" id="bookingLayout">
+
+        <div class="booking__text">
+          <span class="eyebrow eyebrow--light">Book Your Glam</span>
+          <h1 class="page-head__title booking__title reveal">Pick a time&nbsp;— <br>I'll <em>handle the rest.</em></h1>
+          <p class="page-head__intro reveal">One short form, under a minute. You'll get availability, a quote and next steps within one working day. Nothing is charged online and no deposit is taken until we've spoken.</p>
+        </div>
+
+        <form class="form form--light booking__form" id="bookingForm" novalidate>
+          <div class="booking__form-head">
+            <span class="eyebrow">Quick enquiry</span>
+            <h2 class="booking__form-title">Just the essentials</h2>
+            <p class="booking__form-intro">Tell us what you're after and when. Everything else like venue, timings and how many faces, we'll sort out together.</p>
+          </div>
+
+          <div class="form__row">
+            <label class="field">
+              <span>Service</span>
+              <select name="service" id="serviceSelect" required>
+                <option value="" disabled selected>Choose a service</option>
+                <option value="bridal">Signature Bridal</option>
+                <option value="trial">Bridal Trial</option>
+                <option value="party">Bridal Party</option>
+                <option value="occasion">Occasion Glam</option>
+                <option value="editorial">Editorial &amp; Shoots</option>
+                <option value="lesson">Makeup Lesson</option>
+                <option value="unsure">Not sure yet — help me choose</option>
+              </select>
+              <small class="field__hint" id="serviceHint" hidden></small>
+            </label>
+            <label class="field">
+              <span>Event date</span>
+              <input type="date" name="date" id="dateInput" required>
+            </label>
+          </div>
+
+          <div class="form__row">
+            <label class="field">
+              <span>Full name</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Your name">
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="you@example.com">
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Phone / WhatsApp <small>(optional)</small></span>
+            <input type="tel" name="phone" autocomplete="tel" placeholder="07000 000 000">
+          </label>
+
+          <label class="field">
+            <span>Anything we should know? <small>(optional)</small></span>
+            <textarea name="message" rows="3" placeholder="Venue, number of people, the look you're after…"></textarea>
+          </label>
+
+          <div class="form__foot">
+            <p class="form__hint">Reply within one working day. No spam, no newsletters.</p>
+            <button type="submit" class="btn-arrow">
+              <span class="pill pill--lg">Send enquiry</span>
+              <span class="circle circle--outline"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 13 13 3M5 3h8v8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+          </div>
+          <p class="form__error" id="formError" hidden></p>
+        </form>
+
+        <div class="booking__more">
+          <ol class="booking__steps reveal">
+            <li><span>01</span><div><strong>Send your enquiry</strong><p>Under a minute. Nothing is charged online.</p></div></li>
+            <li><span>02</span><div><strong>Quote within a day</strong><p>Elara replies personally with availability and a price — studio or on location.</p></div></li>
+            <li><span>03</span><div><strong>Your date is secured</strong><p>A £50 deposit holds a wedding date, only once we've spoken. Occasions are simply confirmed.</p></div></li>
+          </ol>
+          <div class="booking__talk reveal">
+            <p class="booking__talk-title">Prefer to talk?</p>
+            <ul class="booking__talk-links">
+              <li><a href="mailto:hello@glambyelara.co.uk">hello@glambyelara.co.uk</a></li>
+              <li><a href="tel:+447000000000">07000 000 000</a> <small>WhatsApp</small></li>
+            </ul>
+            <p class="booking__talk-meta">Studio 4, Maple Street, Nottingham · On location UK-wide</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container booking-success" id="bookingSuccess" hidden>
+        <div class="booking-success__card">
+          <span class="form__success-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="m5 11.5 4 4 8-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="eyebrow">Enquiry received</span>
+          <h2 class="booking-success__title">Thank you, <em id="successName">there</em>.</h2>
+          <p class="booking-success__ref">Reference <strong id="successRef">GE-0000</strong></p>
+          <dl class="summary__list" id="successList"></dl>
+          <div class="booking-success__next">
+            <h3>What happens next</h3>
+            <ol>
+              <li><span>01</span>Elara checks the date and replies within one working day with a quote.</li>
+              <li><span>02</span>Happy? A £50 deposit secures a wedding date; occasion bookings are simply confirmed.</li>
+              <li><span>03</span>Trial booked, schedule sent the week before, and the morning takes care of itself.</li>
+            </ol>
+          </div>
+          <div class="booking-success__actions">
+            <a href="index.html" class="pill">Back to home</a>
+            <button type="button" class="pill" id="bookAgain">Send another enquiry</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer footer--plain">
+    <img class="footer__bg" src="https://images.unsplash.com/photo-1730320870329-616a2fe8a8e8?w=1400&q=60&auto=format&fit=crop" alt="" aria-hidden="true">
+    <div class="footer__shade" aria-hidden="true"></div>
+
+    <div class="container footer__grid">
+      <div class="footer__col footer__col--brand">
+        <span class="footer__label">Studio</span>
+        <p>Studio 4, 27 Maple Street<br>Nottingham, NG1 4AB · On location UK-wide</p>
+        <div class="socials">
+          <a class="circle circle--outline circle--light" href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a class="circle circle--outline circle--light" href="#" aria-label="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 3 2.5 5 5.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <a class="circle circle--outline circle--light" href="#" aria-label="Pinterest"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M11 16.5 12.5 9M9.5 12.5c-.5-2.5 1-4.5 3-4.5s3 1.5 2.5 3.5-2 3-3.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+          <a class="circle circle--outline circle--light" href="#" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6H14v-6h2.5l.5-3.5h-3V8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Services</span>
+        <a href="services.html#bridal">Bridal Makeup</a>
+        <a href="services.html#party">Bridal Party</a>
+        <a href="services.html#occasion">Occasion Glam</a>
+        <a href="services.html#editorial">Editorial &amp; Shoots</a>
+        <a href="services.html#lesson">Makeup Lessons</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Explore</span>
+        <a href="about.html">About</a>
+        <a href="services.html#looks">Looks</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Company</span>
+        <a href="booking.html">Book now</a>
+        <a href="mailto:hello@glambyelara.co.uk">hello@glambyelara.co.uk</a>
+        <a href="tel:+447000000000">07000 000 000</a>
+      </div>
+    </div>
+
+    <div class="footer__word" aria-hidden="true">elara</div>
+
+    <div class="footer__bar">
+      <div class="container footer__bar-inner">
+        <span>© 2026 GlamBy Elara. All rights reserved.</span>
+        <span class="footer__bar-mid">Made for real faces, everywhere.</span>
+        <span class="footer__bar-links"><a href="#">Terms of Service</a><a href="#">Privacy Policy</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>
