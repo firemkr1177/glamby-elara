@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Motion layer: hooks for Lenis, GSAP and Motion.
+   globals.css is the original static-site stylesheet (1:1); this file only adds
+   what the animations need.
+   ========================================================================== */
+
+/* next/image writes width/height attributes; the original <img>s had none, so let
+   the stylesheet's own sizing (aspect-ratio, 100% boxes) win over those hints. */
+img { height: auto; }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* Text that GSAP splits stays hidden until it is split, so there's no flash */
+[data-split] { visibility: hidden; }
+.split-line-mask { padding-bottom: .1em; margin-bottom: -.1em; }
+/* Hero pieces wait for their entrance timeline (only when JS is running) */
+.js .hero [data-hero-in] { visibility: hidden; }
+/* Scroll-lit paragraph: words start muted and light up with scroll */
+[data-scroll-text] .w { color: var(--muted-2); }
+/* Logo mark turns on hover */
+.logo__mark { transition: transform .9s var(--ease); }
+.logo:hover .logo__mark { transform: rotate(90deg); }
+/* Circle CTA that sits at the end of a grid row */
+.benefits__cta { justify-self: end; }
+
+/* Scroll progress hairline */
+.progress { position: fixed; left: 0; right: 0; top: 0; z-index: 70; height: 2px; background: var(--tan); transform-origin: 0 50%; pointer-events: none; }
+
+/* Pill label roll on hover */
+.roll { display: inline-block; position: relative; overflow: hidden; line-height: 1.25; vertical-align: middle; }
+.roll > span { display: block; position: relative; transition: transform .5s var(--ease); }
+.roll > span::after { content: attr(data-text); position: absolute; left: 0; top: 100%; width: 100%; }
+.pill:hover .roll > span, .btn-arrow:hover .roll > span { transform: translateY(-100%); }
+
+/* Arrow circles: the arrow turns to point forward */
+.circle--arrow svg, .btn-arrow .circle svg, .pill--icon svg { transition: transform .55s var(--ease); }
+.circle--arrow:hover svg, .btn-arrow:hover .circle svg { transform: rotate(45deg); }
+.pill--icon:hover svg { transform: translateX(3px); }
+.btn-arrow:hover .circle--light { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.form--light .btn-arrow:hover .circle { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.magnetic { display: inline-flex; will-change: transform; }
+
+/* Underline that draws in from the left */
+.footer__col a, .footer__bar a, .booking__talk-links a {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+  transition: background-size .5s var(--ease), color .2s;
+}
+.footer__col a:hover, .footer__bar a:hover, .booking__talk-links a:hover { text-decoration: none; background-size: 100% 1px; }
+
+/* Wordmarks: gradient per letter so letters can move independently */
+.hero__word, .footer__word, .preloader__word { background: none; }
+.hero__word-inner, .footer__word-inner { display: block; white-space: nowrap; }
+.ch {
+  display: inline-block;
+  background: linear-gradient(180deg, #e2cdb4 0%, #b8997c 48%, #6f5544 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Hero */
+.hero__glow { animation: glow-breathe 10s ease-in-out infinite; }
+@keyframes glow-breathe { 0%, 100% { opacity: .82; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+.hero__spot {
+  position: absolute; left: 0; top: 0; z-index: 1; width: 46vw; height: 46vw; margin: -23vw 0 0 -23vw; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(196, 169, 140, .2), rgba(196, 169, 140, 0));
+  pointer-events: none; mix-blend-mode: screen;
+}
+.hero__card-window { position: relative; overflow: hidden; }
+.hero__card-window::after {
+  content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 45%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .38), rgba(255, 255, 255, 0));
+  transform: translateX(-160%) skewX(-18deg); animation: glint 7s var(--ease) 4s infinite;
+}
+@keyframes glint { 0% { transform: translateX(-160%) skewX(-18deg); } 22%, 100% { transform: translateX(330%) skewX(-18deg); } }
+/* the original ".hero__explore span" rule would also hit this wrapper */
+.hero__explore .hero__explore-inner { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; }
+.hero__quote-arrows button { transition: color .2s, transform .2s; }
+.hero__quote-arrows button:active { transform: scale(.85); }
+.hero__quote-body { position: relative; }
+
+/* Statement */
+.statement__thumbs img { transition: transform .6s var(--ease), opacity .3s; }
+.statement__thumbs img:hover { transform: translateY(-4px); opacity: 1; }
+
+/* Kit: shared hover highlight that glides between service rows */
+.service-list__row { color: inherit; }
+.service-list__hl { position: absolute; inset: 0 -24px; z-index: -1; background: rgba(244, 239, 231, .08); pointer-events: none; }
+.service-list__name em { display: inline-block; transition: transform .6s var(--ease); }
+.service-list__row:hover .service-list__name em { transform: translateX(6px); }
+
+/* Benefits + process markers */
+.benefit__icon { transition: transform .9s var(--ease); }
+.benefit:hover .benefit__icon { transform: rotate(-14deg) scale(1.06); }
+.benefit::before, .process li + li::before { transition: transform .9s var(--ease) .3s; }
+[data-anim="pending"] .benefit::before, [data-anim="pending"] li + li::before { transform: rotate(45deg) scale(0) !important; }
+[data-anim="done"] .benefit::before, [data-anim="done"] li + li::before { transform: rotate(225deg) scale(1); }
+
+/* Looks: sliding active tab + heart burst */
+.pill--tab { position: relative; isolation: isolate; }
+.pill--tab.is-active { background: transparent; }
+.tab__bg { position: absolute; inset: -1px; z-index: -1; border-radius: 999px; background: #3b2c24; }
+.looks__search .circle svg { transition: transform .5s var(--ease); }
+.looks__search .circle:hover svg { transform: rotate(180deg); }
+.search { transition: border-color .3s ease, background .3s ease; }
+.search:focus-within { border-color: rgba(244, 239, 231, .55); background: rgba(244, 239, 231, .04); }
+.heart { position: relative; overflow: visible; }
+.heart__dot { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--tan); pointer-events: none; }
+
+.look__media { display: block; }
+
+/* Overlapping swap: old and new content share one grid cell while they cross-fade */
+.stack { display: grid; }
+.stack > * { grid-area: 1 / 1; }
+
+/* Testimonials */
+.testimonials__counter li { position: relative; transition: color .3s, padding .5s var(--ease); }
+.testimonials__counter li.is-active { padding-left: 18px; }
+.testimonials__tick { position: absolute; left: 0; top: 50%; width: 10px; height: 1px; background: var(--ink); }
+.avatar { position: relative; }
+.avatar img { transition: opacity .3s, filter .5s, transform .6s var(--ease); }
+.avatar.is-active img { filter: grayscale(0) contrast(1); }
+
+/* Services */
+.svc { position: relative; }
+.svc::before { content: ""; position: absolute; inset: 0 -24px; background: rgba(244, 239, 231, 0); pointer-events: none; transition: background .6s ease; }
+.svc:hover::before { background: rgba(244, 239, 231, .04); }
+.svc.is-target::before { animation: svc-flash 2.4s var(--ease); }
+@keyframes svc-flash { 0%, 30% { background: rgba(244, 239, 231, .14); } 100% { background: rgba(244, 239, 231, 0); } }
+
+/* Accordion */
+.accordion__panel { overflow: hidden; }
+.accordion__summary span { transition: transform .5s var(--ease); }
+.accordion__summary:hover span { transform: translateX(4px); }
+.accordion__summary:hover i { border-color: var(--ink); }
+
+/* Booking: animated focus line under each field */
+/* wrapper is a direct <span> child of the label, so undo the label-caption rule (".field > span") */
+.form .field > .field__control { position: relative; display: block; font: inherit; font-weight: 400; letter-spacing: normal; text-transform: none; color: inherit; }
+.field__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--cream); transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s var(--ease); pointer-events: none; }
+.form--light .field__bar { background: var(--ink); }
+.field__control:focus-within .field__bar { transform: scaleX(1); }
+.form--light .field.is-invalid .field__bar { background: #b5533f; transform: scaleX(1); }
+.field textarea { display: block; }
+.btn-arrow:disabled { cursor: progress; }
+.dots i { display: inline-block; font-style: normal; animation: dot 1.2s ease-in-out infinite; }
+.dots i:nth-child(2) { animation-delay: .15s; }
+.dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+.booking-success__ref strong { display: inline-block; min-width: 10ch; }
+.form__success-mark svg { overflow: visible; }
+
+/* Mobile menu */
+.mobile-menu { overflow: hidden; }
+.mobile-menu a { display: block; }
+.mobile-menu__glyph { position: absolute; right: -24%; bottom: -14%; width: 76%; color: rgba(244, 239, 231, .05); pointer-events: none; }
+
+/* Page-transition curtain */
+.curtain {
+  position: fixed; inset: 0; z-index: 90; display: grid; place-items: center;
+  background: var(--ink-2); color: #d7c4ab; visibility: hidden; pointer-events: none;
+}
+.curtain__mark { width: 54px; height: 54px; }
+
+/* First-visit preloader */
+.preloader {
+  position: fixed; inset: 0; z-index: 100; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px;
+  background: #1b1310; color: var(--cream);
+}
+html[data-intro="skip"] .preloader { display: none; }
+.preloader__glow { position: absolute; inset: 0; background: radial-gradient(50% 50% at 50% 55%, rgba(122, 86, 62, .45) 0%, rgba(122, 86, 62, 0) 70%); pointer-events: none; }
+.preloader__mark { position: relative; width: 64px; height: 64px; color: #d7c4ab; }
+.preloader__word { position: relative; font-weight: 300; font-size: clamp(96px, 17vw, 240px); line-height: .8; letter-spacing: -.045em; overflow: hidden; padding: .04em .02em .1em; }
+.preloader__word .ch { transform: translateY(115%); }
+.preloader__foot { position: absolute; left: var(--pad); right: var(--pad); bottom: var(--pad); display: flex; align-items: center; gap: 20px; font-size: 12px; color: rgba(244, 239, 231, .6); }
+.preloader__foot em { font-size: 15px; color: var(--cream); }
+.preloader__bar { flex: 1; height: 1px; background: rgba(244, 239, 231, .14); }
+.preloader__fill { display: block; height: 100%; background: var(--tan); transform: scaleX(0); transform-origin: 0 50%; }
+.preloader__count { min-width: 4ch; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Image cursor label */
+.cursor-label {
+  position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none;
+  width: 86px; height: 86px; margin: -43px 0 0 -43px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--cream); color: var(--ink);
+  font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .5);
+}
+@media (hover: none), (pointer: coarse) { .cursor-label { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-split], .js .hero [data-hero-in] { visibility: visible; }
+  [data-scroll-text] .w { color: var(--ink); }
+  .preloader, .curtain { display: none !important; }
+  .hero__glow, .hero__card-window::after, .hero__explore svg, .dots i { animation: none; }
+  .roll > span, .benefit__icon { transition: none; }
+  [data-anim="pending"] .benefit::before, [data-anim="pending"] li + li::before { transform: rotate(45deg) scale(1) !important; }
+}
+
+/* Counting price inside the services price block (the original ".svc__price span" rule targets the "From" label) */
+.svc__price strong .svc__num { display: inline; font-size: inherit; letter-spacing: inherit; text-transform: none; color: inherit; }

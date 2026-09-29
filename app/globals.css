@@ -19,8 +19,8 @@
   --line: rgba(27, 22, 19, .14);
   --line-light: rgba(244, 239, 231, .16);
 
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: var(--font-inter), "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: var(--font-serif), "Instrument Serif", Georgia, "Times New Roman", serif;
 
   --container: 1320px;
   --pad: clamp(20px, 3vw, 44px);
@@ -30,7 +30,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; }
 html, body { overflow-x: hidden; }
 @supports (overflow-x: clip) { html, body { overflow-x: clip; } }
 
@@ -70,20 +70,7 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
 
 .dash { margin: 0 12px; opacity: .5; }
 
-/* --------------------------------------------------------------------------
-   Reveal / scroll effects
-   -------------------------------------------------------------------------- */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-
-[data-scroll-text] .w { color: var(--muted-2); transition: color .35s ease; }
-[data-scroll-text] .w.lit { color: var(--ink); }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  [data-scroll-text] .w { color: var(--ink); }
-}
+/* Reveal / scroll effects live in the "Motion" block at the end of this file. */
 
 /* --------------------------------------------------------------------------
    Pills, circles, buttons
@@ -208,7 +195,6 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
   color: var(--ink); text-decoration: none;
   transition: transform .4s var(--ease);
 }
-.hero__card:hover { transform: translateY(-4px); }
 .hero__card-window { display: block; height: clamp(140px, 11.8vw, 172px); border: 1.5px solid #fff; border-bottom: 0; }
 .hero__card-body { display: block; background: #fff; padding: 12px 12px 10px; }
 .hero__card-title { display: block; font-size: 12px; line-height: 1.25; margin-bottom: 8px; }
@@ -317,10 +303,7 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
   padding: 22px 0; border-bottom: 1px solid var(--line-light); font-size: 12px;
   transition: background .3s ease;
 }
-.service-list__row.is-highlight, .service-list__row:hover { background: rgba(244, 239, 231, .08); box-shadow: 0 0 0 100vmax rgba(244, 239, 231, 0); }
-.service-list__row.is-highlight { position: relative; }
-.service-list__row.is-highlight::before, .service-list__row:hover::before { content: ""; position: absolute; inset: 0 -24px; background: inherit; z-index: -1; }
-.service-list__row { position: relative; }
+.service-list__row { position: relative; z-index: 0; }
 .service-list__name { font-size: 18px; font-weight: 400; }
 .service-list__name em { font-size: 1.05em; }
 .service-list__note { color: rgba(244, 239, 231, .85); }
@@ -394,8 +377,8 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
 .testimonials__counter li { transition: color .3s; }
 .testimonials__counter li.is-active { color: var(--ink); }
 .testimonials__figure { aspect-ratio: 1 / 1.08; overflow: hidden; background: #2a1f19; }
-.testimonials__figure img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.12); transition: opacity .5s ease; }
-.testimonials__figure img.is-fading { opacity: 0; }
+.testimonials__figure { position: relative; }
+.testimonials__figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.12); }
 
 .testimonials__content { display: flex; flex-direction: column; padding-top: 40px; }
 .testimonials__mark { font-family: var(--serif); font-size: 140px; line-height: .6; color: var(--sand); height: 64px; display: block; }
@@ -421,18 +404,18 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
 
 .accordion { border-top: 1px solid var(--line); }
 .accordion__item { border-bottom: 1px solid var(--line); }
-.accordion__item summary {
+.accordion__summary {
   list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding: 22px 0; font-size: clamp(16px, 1.4vw, 19px); font-weight: 400; letter-spacing: -.01em;
 }
-.accordion__item summary::-webkit-details-marker { display: none; }
-.accordion__item summary i { position: relative; flex: none; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; transition: background .25s, border-color .25s; }
-.accordion__item summary i::before, .accordion__item summary i::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--ink); transition: transform .3s var(--ease), background .25s; }
-.accordion__item summary i::before { width: 12px; height: 1px; transform: translate(-50%, -50%); }
-.accordion__item summary i::after { width: 1px; height: 12px; transform: translate(-50%, -50%); }
-.accordion__item[open] summary i { background: var(--ink); border-color: var(--ink); }
-.accordion__item[open] summary i::before, .accordion__item[open] summary i::after { background: var(--cream); }
-.accordion__item[open] summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+.accordion__summary { width: 100%; background: none; border: 0; color: inherit; text-align: left; font-family: inherit; }
+.accordion__summary i { position: relative; flex: none; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; transition: background .25s, border-color .25s; }
+.accordion__summary i::before, .accordion__summary i::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--ink); transition: transform .3s var(--ease), background .25s; }
+.accordion__summary i::before { width: 12px; height: 1px; transform: translate(-50%, -50%); }
+.accordion__summary i::after { width: 1px; height: 12px; transform: translate(-50%, -50%); }
+.accordion__item.is-open .accordion__summary i { background: var(--ink); border-color: var(--ink); }
+.accordion__item.is-open .accordion__summary i::before, .accordion__item.is-open .accordion__summary i::after { background: var(--cream); }
+.accordion__item.is-open .accordion__summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
 .accordion__body { padding: 0 0 24px; max-width: 560px; font-size: 14px; line-height: 1.7; color: var(--muted); }
 
 /* --------------------------------------------------------------------------
