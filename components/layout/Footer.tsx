@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Roll } from "@/components/motion/Roll";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { CONTACT, u } from "@/lib/content";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import { FooterWord } from "./FooterWord";
 
 const SOCIALS = [
@@ -132,6 +133,7 @@ export function Footer({ cta = true }: { cta?: boolean }) {
           <span className="footer__bar-links">
             <a href="#">Terms of Service</a>
             <a href="#">Privacy Policy</a>
+            <CookieSettingsButton />
           </span>
         </div>
       </div>

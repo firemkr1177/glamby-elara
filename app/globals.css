@@ -780,3 +780,15 @@ sup { font-size: .38em; vertical-align: top; position: relative; top: .35em; mar
   .booking-success__actions .pill { width: 100%; }
   .statement__panel { min-height: 360px; }
 }
+
+/* Cookie bar */
+.cookie { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 95; background: rgba(244, 239, 231, .96); color: var(--ink); border: 1px solid var(--line); border-radius: 18px; padding: 16px; box-shadow: 0 18px 40px -18px rgba(27, 22, 19, .45); backdrop-filter: blur(14px); }
+.cookie__text { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--cocoa); }
+.cookie__actions { display: flex; gap: 8px; margin-top: 12px; }
+.cookie__btn { flex: 1; height: 40px; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s; }
+.cookie__btn:hover { background: rgba(27, 22, 19, .05); }
+.cookie__btn--solid { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+.cookie__btn--solid:hover { background: var(--cocoa); }
+.footer__bar-btn { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+.footer__bar-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (min-width: 640px) { .cookie { right: auto; left: 20px; bottom: 20px; max-width: 384px; } }

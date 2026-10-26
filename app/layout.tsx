@@ -6,6 +6,7 @@ import { CursorLabel } from "@/components/motion/CursorLabel";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { Preloader, introScript } from "@/components/motion/Preloader";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import CookieConsent from "@/components/CookieConsent";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 import "./motion.css";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <PageTransition />
           <CursorLabel />
+          <CookieConsent />
         </Providers>
       </body>
     </html>
